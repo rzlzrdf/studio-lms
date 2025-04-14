@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const courseType = defineType({
-  name: 'course',
-  title: 'Course',
+export const chapterType = defineType({
+  name: 'chapter',
+  title: 'Chapter',
   type: 'document',
   preview: {
     select: {
@@ -48,38 +48,12 @@ export const courseType = defineType({
       description: 'Description of the class',
     }),
     defineField({
-      name: 'class',
-      title: 'Class',
+      name: 'course',
+      title: 'Course',
       type: 'reference',
-      to: [{type: 'class'}],
+      to: [{type: 'course'}],
       validation: (Rule) => Rule.required(),
-      description: 'Class for this course',
-    }),
-    defineField({
-      name: 'teacher',
-      title: 'Teacher',
-      type: 'reference',
-      to: [{type: 'user'}],
-      options: {
-        filter: `role in ['admin', 'teacher']`,
-      },
-      validation: (Rule) =>
-        Rule.required().custom(async (value, context) => {
-          if (!value || !value._ref) return 'Teacher is required'
-
-          // Fetch the referenced user document
-          const user = await context
-            .getClient({apiVersion: '2023-05-03'})
-            .fetch(`*[_type == "user" && _id == $id][0]{ role }`, {id: value._ref})
-
-          if (!user) return 'User not found'
-          if (!['admin', 'teacher'].includes(user.role)) {
-            return 'Only users with admin or teacher roles can be assigned as teachers'
-          }
-
-          return true
-        }),
-      description: 'Teacher of the class',
+      description: 'Related to course',
     }),
   ],
 })
