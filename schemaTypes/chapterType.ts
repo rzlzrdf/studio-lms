@@ -45,15 +45,26 @@ export const chapterType = defineType({
       title: 'Description',
       type: 'text',
       validation: (Rule) => Rule.required(),
-      description: 'Description of the class',
+      description: 'Deskripsi bab akan ditampilkan pada accordion materi',
     }),
     defineField({
-      name: 'course',
-      title: 'Course',
-      type: 'reference',
-      to: [{type: 'course'}],
+      name: 'resources',
+      title: 'Resources',
+      type: 'resourceType',
+      description: 'Materi yang ada pada bab ini',
       validation: (Rule) => Rule.required(),
-      description: 'Related to course',
+    }),
+    defineField({
+      name: 'soal',
+      title: 'Soal',
+      type: 'array',
+      of: [
+        {
+          type: 'soalType',
+        },
+      ],
+      description: 'Soal yang ada pada bab ini',
+      validation: (Rule) => Rule.required(),
     }),
   ],
 })

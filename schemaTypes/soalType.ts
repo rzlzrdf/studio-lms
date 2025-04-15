@@ -1,14 +1,14 @@
 import {defineField, defineType} from 'sanity'
 
-export const resourceObject = defineType({
-  name: 'resourceType',
-  title: 'Resource Type',
-  type: 'object',
+export const soalObject = defineType({
+  name: 'soalType',
+  title: 'Soal Type',
+  type: 'document',
   fields: [
-   
+    
     defineField({
-      name: 'overview',
-      title: 'Overview',
+      name: 'pertanyaan',
+      title: 'Pertanyaan',
       type: 'array',
       of: [
         {
@@ -35,36 +35,20 @@ export const resourceObject = defineType({
       ],
       description: 'Overview of the resource type',
     }),
+
+
     defineField({
-      name: 'pdf',
-      title: 'PDF',
-      type: 'file',
-      options: {
-        accept: 'application/pdf',
-      },
-      description: 'PDF file of the resource type',
-    }),
-    defineField({
-      name: 'gdrive',
-      title: 'Google Drive',
-      type: 'url',
-      description: 'Google Drive URL of the resource type',
-      validation: (Rule) => Rule.uri({scheme: ['https']}),
-    }),
-    defineField({
-      name: 'video',
-      title: 'Video',
+      name: 'pilihanGanda',
+      title: 'Pilihan Ganda',
       type: 'array',
       of: [
         {
-          type: 'url',
-          title: 'Video URL',
-          description: 'URL of the video',
-          validation: (Rule) => Rule.uri({scheme: ['https', 'http']}),
+          type: 'optionAnswerType',
         },
       ],
       
-      description: 'Video URL of the resource type',
+      description: 'Pilihan ganda dari soal, jika kosongan maka soal adalah essay',
+      validation: (Rule) => Rule.unique()
     }),
   ],
 })

@@ -7,10 +7,13 @@ export const courseType = defineType({
   preview: {
     select: {
       title: 'name',
+      class: 'class.name',
+      
     },
-    prepare({title}) {
+    prepare({title, class:className}) {
       return {
-        title: title || 'No name',
+        title: title || 'No name' + ' - ',
+        subtitle: className || 'No class',
       }
     },
   },
@@ -80,6 +83,21 @@ export const courseType = defineType({
           return true
         }),
       description: 'Teacher of the class',
+    }),
+    defineField({
+      name: 'chapter',
+      title: 'Chapter',
+      // type array of references
+      type: 'array',
+      of: [
+        {type: 'reference', to: [{type: 'chapter'}]},
+      ],
+      description: 'PIlih atau buat bab pada course ini',
+      validation: (Rule) => Rule.required(),
+      options: {
+        layout: 'tags',
+        sortable: true
+      }
     }),
   ],
 })
