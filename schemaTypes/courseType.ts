@@ -93,7 +93,7 @@ export const courseType = defineType({
         {type: 'reference', to: [{type: 'chapter'}]},
       ],
       description: 'PIlih atau buat bab pada course ini',
-      validation: (Rule) => Rule.required(),
+
       options: {
         layout: 'tags',
         sortable: true
