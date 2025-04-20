@@ -24,10 +24,10 @@ export const chapterType = defineType({
         maxLength: 20,
         slugify: (input) => {
           const slug = input
-            .toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/[^\w-]+/g, '')
-            .substring(0, 20)
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^\w-]+/g, '')
+          .substring(0, 20)
           return slug
         },
       },
