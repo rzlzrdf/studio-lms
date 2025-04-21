@@ -60,7 +60,8 @@ export const chapterType = defineType({
       type: 'array',
       of: [
         {
-          type: 'soalType',
+          type: "reference",
+          to: [{type: 'soalType'}],
         },
       ],
       description: 'Soal yang ada pada bab ini',

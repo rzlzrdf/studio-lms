@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export const soalObject = defineType({
   name: 'soalType',
-  title: 'Soal Type',
+  title: 'Bank Soal',
   type: 'document',
   fields: [
     
@@ -36,6 +36,20 @@ export const soalObject = defineType({
       description: 'Overview of the resource type',
     }),
 
+    defineField({
+      name: "type",
+      title: "Tipe Soal",
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Essay', value: 'essay' },
+          { title: 'Pilgan', value: 'pilgan' },
+          { title: 'Praktik', value: 'praktik' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+      initialValue: 'essay'
+    }),
 
     defineField({
       name: 'pilihanGanda',
@@ -48,7 +62,10 @@ export const soalObject = defineType({
       ],
       
       description: 'Pilihan ganda dari soal, jika kosongan maka soal adalah essay',
-      validation: (Rule) => Rule.unique()
+      validation: (Rule) => Rule.unique(),
+      hidden: ({parent, value}) => {
+        return !value && parent?.type !== 'pilgan'
+      }
     }),
   ],
 })
