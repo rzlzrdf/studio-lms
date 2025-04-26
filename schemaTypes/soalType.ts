@@ -4,8 +4,23 @@ export const soalObject = defineType({
   name: 'soalType',
   title: 'Bank Soal',
   type: 'document',
+  preview: {
+    select: {
+      title: 'pertanyaan',
+      type: 'type'
+    },
+    prepare({ title,type }: { title: any; type: any; }) {
+      const block = title?.find((block: { _type: string; }) => block._type === 'block');
+      const previewText = block
+        ? block.children?.map((child: { text: any; }) => child.text).join('') || 'No text'
+        : 'No content';
+      return {
+        title: previewText,
+        subtitle: type,
+      };
+    },
+  },
   fields: [
-    
     defineField({
       name: 'pertanyaan',
       title: 'Pertanyaan',
