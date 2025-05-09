@@ -3,7 +3,7 @@ import {defineField, defineType} from 'sanity'
 export const todoItem  = defineType({
     name: "todoItem",
     title: "Todo Item",
-    type: "object",
+    type: "document",
     fields: [
         defineField({
             name: "title",
@@ -12,8 +12,8 @@ export const todoItem  = defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: "completed",
-            title: "Completed",
+            name: "isCompleted",
+            title: "is Completed",
             type: "boolean",
             initialValue: false,
         }),

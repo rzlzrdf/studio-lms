@@ -2,12 +2,12 @@ import {defineField, defineType} from 'sanity'
 
 export const todoType = defineType({
     name: 'todoType',
-    title: 'Todo',
+    title: 'User <=> Todo',
     type: 'document',
     preview: {
         select: {
             title: 'userId.name',
-            chapter: 'chapter.name',
+            chapter: 'chapterId.name',
         },
         prepare({title, chapter}) {
             return {
