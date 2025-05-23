@@ -26,19 +26,19 @@ export const todoType = defineType({
             description: 'Name of the class',
         }),
         defineField({
+            name: 'courseId',
+            title: 'Course ID',
+            type: 'reference',
+            to: [{type: 'course'}],
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'chapterId',
             title: 'Chapter ID',
             type: 'reference',
             to: [{type: 'chapter'}],
             validation: (Rule) => Rule.required(),
             description: 'Chapter ID for this todo',
-        }),
-        defineField({
-            name: 'soalId',
-            title: 'Soal ID',
-            type: 'reference',
-            to: [{type: 'soalType'}],
-            validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'todo',
